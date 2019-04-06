@@ -25,26 +25,33 @@
   <div class="container shadow-lg" id="app">
     <!-- TITLE MENU  -->
     <div class="row">
-      <div class="col-12 my-4 text-center">
-        <h2>Мы ищем Вас...</p>
+      <div class="col-12 mt-4 text-center">
+        <h2>Мы ищем Вас...</h2>
+      </div>
+      <div class="col-6 offset-3 mb-4 text-center">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">25%</div>
+        </div>
       </div>
     </div>
 
     <!-- TABS MENU -->
     <div class="row">
       <div class="col-12">
-        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+        <ul class="nav nav-tabs nav-fill" id="menuTabs" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Код</a>
+            <a class="nav-link active" id="code-tab" data-toggle="tab" href="#code" role="tab" aria-controls="code" aria-selected="true"><i class="fa fa-envelope" aria-hidden="true"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Фото</a>
+            <a class="nav-link" id="photo-tab" data-toggle="tab" href="#photo" role="tab" aria-controls="photo" aria-selected="false"><i class="fa fa-camera" aria-hidden="true"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Сигнал</a>
+            <a class="nav-link" id="signal-tab" data-toggle="tab" href="#signal" role="tab" aria-controls="signal" aria-selected="false"><i class="fa fa-wifi" aria-hidden="true"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">...</a>
+            <a class="nav-link" id="operator-tab" data-toggle="tab" href="#operator" role="tab" aria-controls="operator" aria-selected="false"><i class="fa fa-phone" aria-hidden="true"></i></a>
           </li>
         </ul>
       </div>
@@ -52,10 +59,11 @@
 
     <div class="row">
       <div class="col-12">
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        <div class="tab-content" id="menuTabsContent">
+          <div class="tab-pane fade show active" id="code" role="tabpanel" aria-labelledby="code-tab">Код ...</div>
+          <div class="tab-pane fade" id="photo" role="tabpanel" aria-labelledby="photo-tab">Фото ...</div>
+          <div class="tab-pane fade" id="signal" role="tabpanel" aria-labelledby="signal-tab">Сигнал ...</div>
+          <div class="tab-pane fade" id="operator" role="tabpanel" aria-labelledby="operator-tab">Оператор ...</div>
         </div>
       </div>
     </div>
