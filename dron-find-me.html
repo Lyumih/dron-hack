@@ -5,10 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+
   <link href="https://fonts.googleapis.com/css?family=Cormorant+Infant" rel="stylesheet">
+
+  <link rel="stylesheet" href="lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
+  <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/font.css">
+
   <link rel="stylesheet" href="css/dron-find-me.css">
   <title>DRON: Найди меня!</title>
 </head>
@@ -60,10 +64,98 @@
     <div class="row">
       <div class="col-12">
         <div class="tab-content" id="menuTabsContent">
-          <div class="tab-pane fade show active" id="code" role="tabpanel" aria-labelledby="code-tab">Код ...</div>
-          <div class="tab-pane fade" id="photo" role="tabpanel" aria-labelledby="photo-tab">Фото ...</div>
-          <div class="tab-pane fade" id="signal" role="tabpanel" aria-labelledby="signal-tab">Сигнал ...</div>
-          <div class="tab-pane fade" id="operator" role="tabpanel" aria-labelledby="operator-tab">Оператор ...</div>
+          <!-- MESSAGE CONTENT -->
+          <div class="tab-pane fade show active" id="code" role="tabpanel" aria-labelledby="code-tab">
+            <div class="container shadow-lg" id="app">
+              <div class="row">
+                <div class="col-12 my-4 text-center">
+                  <h2>Заказ №13 прибыл</h2>
+                  <p>Подтвердите, что вы являетесь заказчиком</p>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 my-4 text-center">
+                  <button type="button" v-show="isSend" @click="sendCode" class="btn btn-primary btn-lg">Получить код авторизации</button>
+
+                  <div class="input-group input-group-lg" v-show="isCheck">
+
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Код</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="****" minlength="4" maxlength="4" aria-label="" aria-describedby="basic-addon1">
+                    <div class="input-group-append">
+                      <button class="btn btn-success" @click="checkCode" type="button">Проверить</button>
+                    </div>
+                  </div>
+
+                  <h2 class="alert alert-success" v-show="isSuccess">Владелец подтверждён</h2>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- PHOTO CONTENT -->
+          <div class="tab-pane fade text-center" id="photo" role="tabpanel" aria-labelledby="photo-tab">
+
+            <div class="col-12 my-4 text-center">
+
+              <p>Сделайте Selfi и приложите файл</p>
+              <p>Мы постораемся найти Вас по вашему окружению</p>
+            </div>
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+              <div class="fileinput-preview img-thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+              <div>
+                <span class="btn btn-outline-secondary btn-file">
+                  <span class="fileinput-new">Выбрать изображение</span>
+                  <span class="fileinput-exists">Поменять</span>
+                  <input type="file" name="...">
+                </span>
+                <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Отменить</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIGNAL CONTENT -->
+          <div class="tab-pane fade" id="signal" role="tabpanel" aria-labelledby="signal-tab">
+            <div class="row">
+              <div class="col-12 mt-4 mb-2 text-center">
+                <p>Включите Wi-Fi и GPS</p>
+                <p>Дрон будет ориентироваться на источник сигнала</p>
+              </div>
+              <div class="col-4 p-3  text-center">
+                <p class="shadow-lg p-3"><i class="fa mr-3 fa-signal " aria-hidden="true"></i>
+                  <i class=" fa fa-check-circle-o " aria-hidden="true"></i>
+                </p>
+              </div>
+              <div class="col-8 text-center">
+                <p><i class="fa fa-fighter-jet " aria-hidden="true"></i>
+                  <i class=" mx-2 fa fa-refresh fa-spin fa-fw"></i>
+
+                  <i class="fa fa-mobile " aria-hidden="true"></i>
+                </p>
+                <p class="text-center">
+                  До Вас: 15 метров </p>
+                <p class="text-right"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHONE CONTENT -->
+          <div class="tab-pane fade" id="operator" role="tabpanel" aria-labelledby="operator-tab">
+            <div class="row">
+              <div class="col-12 mt-4 mb-2 text-center">
+                <p>Если у вас возникли сложности с доставкой, вам позвонят на номер, указанный в вашем профиле.</p>
+                <button type="button" class="btn btn-primary">Заказать бесплатный звонок</button>
+                <p class="font-italic">Вам перезвонят через: 40 сек</p>
+
+                <div class="col-12">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -73,6 +165,7 @@
 
   <script src="lib/jquery-3.3.1.min.js"></script>
   <script src="lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
   <script src="lib/vue.js"></script>
   <script src="js/dron-find-me.js"></script>
 
