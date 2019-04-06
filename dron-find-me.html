@@ -23,38 +23,42 @@
   </nav>
 
   <div class="container shadow-lg" id="app">
-    <div class="row ">
+    <!-- TITLE MENU  -->
+    <div class="row">
       <div class="col-12 my-4 text-center">
         <h2>Мы ищем Вас...</p>
       </div>
     </div>
 
+    <!-- TABS MENU -->
     <div class="row">
       <div class="col-12">
-        <p>Табы: смс | фото | WiFi + BlueTooth | ...</p>
+        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Код</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Фото</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Сигнал</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">...</a>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-12 my-4 text-center">
-        <button type="button" v-show="isSend" @click="sendCode" class="btn btn-primary btn-lg">Получить код авторизации</button>
-
-        <div class="input-group input-group-lg" v-show="isCheck">
-
-          <div class="input-group-prepend">
-            <span class="input-group-text">Код</span>
-          </div>
-          <input type="text" class="form-control" placeholder="****" minlength="4" maxlength="4" aria-label="" aria-describedby="basic-addon1">
-          <div class="input-group-append">
-            <button class="btn btn-success" @click="checkCode" type="button">Проверить</button>
-          </div>
+      <div class="col-12">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
         </div>
-
-        <h2 class="alert alert-success" v-show="isSuccess">Успех</h2>
       </div>
-
     </div>
-  </div>
   </div>
 
 
