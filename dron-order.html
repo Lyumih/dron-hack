@@ -15,25 +15,40 @@
 
 <body>
   <nav class="container navbar navbar-dark bg-dark">
-    <a class=" navbar-brand" href="#!">
+    <a class=" navbar-brand mx-2" href="#!">
       <h1>DRON-HACK
         <i class="fa fa-plane " aria-hidden="true"></i>
       </h1>
     </a>
   </nav>
 
-  <div class="container shadow-lg">
+  <div class="container shadow-lg" id="app">
     <div class="row ">
-      <div class="col-12 my-4">
-        <h2>Заказ $13 прибыл</p>
+      <div class="col-12 my-4 text-center">
+        <h2>Заказ №13 прибыл</p>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-12 my-4">
-        <button type="button" class="btn btn-primary btn-lg">Получить код авторизации</button>
+      <div class="col-12 my-4 text-center">
+        <button type="button" v-show="isSend" @click="sendCode" class="btn btn-primary btn-lg">Получить код авторизации</button>
+
+        <div class="input-group input-group-lg" v-show="isCheck">
+
+          <div class="input-group-prepend">
+            <span class="input-group-text">Код</span>
+          </div>
+          <input type="text" class="form-control" placeholder="****" minlength="4" maxlength="4" aria-label="" aria-describedby="basic-addon1">
+          <div class="input-group-append">
+            <button class="btn btn-success" @click="checkCode" type="button">Проверить</button>
+          </div>
+        </div>
+
+        <h2 class="alert alert-success" v-show="isSuccess">Успех</h2>
       </div>
+
     </div>
+  </div>
   </div>
 
 
