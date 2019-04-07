@@ -34,7 +34,18 @@
             {{ progressCreatePhoto }}</div>
         </div>
 
-        <div v-show="isShowMap">Карта: 100х100</div>
+        <div v-show="isShowMap">
+          <p>x: {{ xClient }}<br />y {{ yClient }}</p>
+          <div class="col-12">
+            <img class="map-box" @click="moveMe" id="map-image" src="image/plane1.jpg" alt="">
+
+          </div>
+          <div class="map-box">
+            <!-- <img class="" @click="moveMe" id="map-image" src="image/plane1.jpg" alt=""> -->
+
+          </div>
+
+        </div>
 
       </div>
 
