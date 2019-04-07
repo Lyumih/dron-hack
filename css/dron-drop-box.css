@@ -16,6 +16,6 @@
   cursor: crosshair;
 }
 
-.map-box {
-  /* background-image: url(./../image/plane1.jpg); */
+#client-marker {
+  position: absolute;
 }
