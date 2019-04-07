@@ -19,8 +19,8 @@ var app = new Vue({
     time: 8,
     progressCreatePhoto: 0,
 
-    xClient: '?',
-    yClient: '?',
+    xClient: '??',
+    yClient: '??',
     xDron: 0,
     yDron: 0
   },
