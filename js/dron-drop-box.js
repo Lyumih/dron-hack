@@ -1,7 +1,7 @@
 var app = new Vue({
   el: "#app",
   data: {
-    message: 'Дрон прилетел в место доставки',
+    message: 'Дрон находится в радиусе места доставки',
     labelButton: 'Забрать товар',
 
     isShowTime: true,
@@ -16,8 +16,8 @@ var app = new Vue({
 
     isSendData: false,
 
-    time: 1,
-    progressCreatePhoto: 95,
+    time: 8,
+    progressCreatePhoto: 0,
 
     xClient: '?',
     yClient: '?',
@@ -31,7 +31,7 @@ var app = new Vue({
       this.time--
       if (this.time <= 0) {
         clearInterval(timer)
-        this.message = 'Дрон прилетел в место доставки'
+        this.message = 'Дрон находится в радиусе места доставки'
         this.isShowTime = false
         this.isShowButton = true
       }
@@ -41,7 +41,7 @@ var app = new Vue({
   methods: {
     wantGetBox: function() {
       this.isShowButton = false
-      this.message = "Пожалуйста, подождите. Делается снимок местности."
+      this.message = "Пожалуйста, подождите... Делается снимок местности."
       this.isShowProgressBar = true
 
       let timer = setInterval(() => {
@@ -55,7 +55,7 @@ var app = new Vue({
     },
     doneCreatePhoto: function() {
       this.isShowProgressBar = false
-      this.message = 'На созданном снимке отметьте ваше местоположение.'
+      this.message = 'На созданном снимке отметьте ваше местоположение. Красным кругом будет подсвечено место посадки дрона'
       this.isShowMap = true
 
       this.labelButton = "Отправить координаты"
@@ -128,7 +128,7 @@ var app = new Vue({
     },
 
     finishOrder: function() {
-      this.isShowMap = false
+      // this.isShowMap = false
       this.labelButton = 'Заказать новый товар'
       this.message = 'Спасибо, что воспользовались нашим сервисом!'
       this.isShowAlertSuccess = true

@@ -23,7 +23,7 @@
   </nav>
 
   <!-- CONTENT -->
-  <main id="app" class="container shadow-lg py-3" id="app">
+  <main id="app" class="container shadow-lg py-5" id="app">
     <div class="row">
       <!-- Page 1: button get box -->
       <div class="col-12 text-center">
@@ -35,8 +35,8 @@
           <strong>Товар был успешно доставлен!</strong>
         </div>
         <p>{{ message }} <span v-if="isShowTime">{{ time }} сек</span></p>
-        <button class="btn btn-primary" v-if="isShowButton" @click="wantGetBox">{{ labelButton }}</button>
-        <button class="btn btn-primary" v-if="isShowButtonSendXY" @click="sendCoordinat">{{ labelButton }}</button>
+        <button class="btn btn-primary btn-lg" v-if="isShowButton" @click="wantGetBox">{{ labelButton }}</button>
+        <button class="btn btn-primary btn-lg" v-if="isShowButtonSendXY" @click="sendCoordinat">{{ labelButton }}</button>
 
         <div class="progress" v-if="isShowProgressBar">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="{width:progressCreatePhoto+'%' }">
@@ -47,7 +47,7 @@
 
         <!-- КАРТА -->
         <div v-if="isShowMap">
-          <p>x: {{ xClient }}<br>y {{ yClient }}</p>
+          <p v-if="isShowMap && !isShowAlertSuccess">x: {{ xClient }}<br>y {{ yClient }}</p>
 
           <div class="col-12">
             <div class="position-relative">
