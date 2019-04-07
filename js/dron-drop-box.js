@@ -1,20 +1,34 @@
 var app = new Vue({
   el: "#app",
   data: {
-    isWantGetBox: true,
-    isCreatedPhotos: false,
-    progressCreatePhoto: 0,
+    message: 'Дрон прилетел в место доставки',
+    labelButton: 'Забрать товар',
+    isShowButton: true,
+    progressCreatePhoto: 70,
+    isShowProgressBar: false,
+
   },
   methods: {
     wantGetBox: function() {
-      this.isWantGetBox = false;
-      this.isCreatedPhotos = true;
+      this.isShowButton = false
+      this.message = "Пожалуйста, подождите. Делается снимок местности."
+      this.isShowProgressBar = true
+
+      console.log(this.progressCreatePhoto)
+
+      let timer = setInterval(() => {
+        this.progressCreatePhoto++
+        if (this.progressCreatePhoto === 100) {
+          clearInterval(timer)
+          this.doneCreatePhoto()
+        }
+      }, 50)
+
     },
-    startCreatePhoto: function() {
-      while (this.progressCreatePhoto < 100) {
-        this.progressCreatePhoto++;
-        console.log(this.progressCreatePhoto);
-      }
+    doneCreatePhoto: function() {
+      this.isShowProgressBar = false
+      this.message = 'На созданном снимке отметьте ваше местоположение.'
+
     }
 
   }
