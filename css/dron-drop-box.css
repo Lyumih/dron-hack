@@ -16,6 +16,12 @@
   cursor: crosshair;
 }
 
-.map-box {
-  /* background-image: url(./../image/plane1.jpg); */
+.dron-marker {
+  min-width: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  max-width: 40px;
+  background-color: red;
+  border-radius: 50%;
+  opacity: 0.4;
 }
