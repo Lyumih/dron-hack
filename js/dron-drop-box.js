@@ -1,7 +1,7 @@
 var app = new Vue({
   el: "#app",
   data: {
-    message: 'Дрон прилетел в место доставки',
+    message: 'Дрон находится в радиусе места доставки',
     labelButton: 'Забрать товар',
 
     isShowTime: true,
@@ -10,9 +10,14 @@ var app = new Vue({
     isShowMap: false,
     isShowClientMarker: false,
     isShowDronMarker: false,
+    isShowButtonSendXY: false,
+    isShowAlert: false,
+    isShowAlertSuccess: false,
 
-    time: 1,
-    progressCreatePhoto: 95,
+    isSendData: false,
+
+    time: 8,
+    progressCreatePhoto: 0,
 
     xClient: '?',
     yClient: '?',
@@ -26,7 +31,7 @@ var app = new Vue({
       this.time--
       if (this.time <= 0) {
         clearInterval(timer)
-        this.message = 'Дрон прилетел в место доставки'
+        this.message = 'Дрон находится в радиусе места доставки'
         this.isShowTime = false
         this.isShowButton = true
       }
@@ -36,10 +41,8 @@ var app = new Vue({
   methods: {
     wantGetBox: function() {
       this.isShowButton = false
-      this.message = "Пожалуйста, подождите. Делается снимок местности."
+      this.message = "Пожалуйста, подождите... Делается снимок местности."
       this.isShowProgressBar = true
-
-      console.log(this.progressCreatePhoto)
 
       let timer = setInterval(() => {
         this.progressCreatePhoto++
@@ -52,16 +55,18 @@ var app = new Vue({
     },
     doneCreatePhoto: function() {
       this.isShowProgressBar = false
-      this.message = 'На созданном снимке отметьте ваше местоположение.'
+      this.message = 'На созданном снимке отметьте ваше местоположение. Красным кругом будет подсвечено место посадки дрона'
       this.isShowMap = true
 
       this.labelButton = "Отправить координаты"
-      this.isShowButton = true
+      this.isShowButtonSendXY = true
     },
 
     moveMe: function(event) {
-      this.isShowClientMarker = true;
-      this.isShowDronMarker = true;
+      this.isShowAlert = false
+      if (this.isSendData) return
+      this.isShowClientMarker = true
+      this.isShowDronMarker = true
       console.log(event)
 
       var x = event.offsetX == undefined ? event.layerX : event.offsetX;
@@ -89,10 +94,45 @@ var app = new Vue({
       }
     },
 
+    sendCoordinat: function() {
+      if (this.yDron === 0) {
+        this.isShowAlert = true
+        return;
+      }
+      this.isSendData = true
+      this.isShowButton = false
+      this.progressCreatePhoto = 0
+      this.isShowProgressBar = true
+      this.message = "Дрон доставит груз в указаной области в течении: "
+      this.time = 10
+      this.isShowTime = true
+
+      let timer = setInterval(() => {
+        this.isShowButtonSendXY = false
+        this.progressCreatePhoto++
+        if (this.progressCreatePhoto >= 100) {
+          clearInterval(timer)
+        }
+      }, 100)
+
+      let timer2 = setInterval(() => {
+        this.time--
+        if (this.time <= 0) {
+          clearInterval(timer2)
+          this.isShowProgressBar = false
+          this.isShowTime = false
+          this.finishOrder()
+        }
+      }, 1000)
+
+    },
+
     finishOrder: function() {
-      this.isShowMap = false
+      // this.isShowMap = false
       this.labelButton = 'Заказать новый товар'
-      this.message = 'Товар был успешно доставлен! Спасибо, что воспользовались нашим сервисом'
+      this.message = 'Спасибо, что воспользовались нашим сервисом!'
+      this.isShowAlertSuccess = true
+
     }
 
   }
