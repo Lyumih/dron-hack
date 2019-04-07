@@ -9,12 +9,15 @@ var app = new Vue({
     isShowProgressBar: false,
     isShowMap: false,
     isShowClientMarker: false,
+    isShowDronMarker: false,
 
     time: 1,
     progressCreatePhoto: 95,
 
     xClient: '?',
     yClient: '?',
+    xDron: 0,
+    yDron: 0
   },
   created: function() {
     this.message = 'Ожидаемое время прибытия дрона: '
@@ -58,6 +61,7 @@ var app = new Vue({
 
     moveMe: function(event) {
       this.isShowClientMarker = true;
+      this.isShowDronMarker = true;
       console.log(event)
 
       var x = event.offsetX == undefined ? event.layerX : event.offsetX;
@@ -70,6 +74,19 @@ var app = new Vue({
 
       this.xClient = Math.round(x * 100 / width);
       this.yClient = Math.round(y * 100 / height);
+
+      let diapazon = Math.floor(Math.random() * 15 + 15)
+      if (this.xClient > 50) {
+        this.xDron = this.xClient - diapazon
+      } else {
+        this.xDron = this.xClient + diapazon
+      }
+      diapazon = Math.floor(Math.random() * 15 + 15)
+      if (this.yClient > 50) {
+        this.yDron = this.yClient - diapazon
+      } else {
+        this.yDron = this.yClient + diapazon
+      }
     },
 
     finishOrder: function() {

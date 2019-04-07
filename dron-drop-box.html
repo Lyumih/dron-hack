@@ -40,7 +40,9 @@
           <div class="col-12">
             <div class="position-relative">
 
-              <div id="client-marker" v-show='isShowClientMarker' class="client-marker" :title="'x: '+ xClient +', y: ' + yClient " :style="{top: yClient-2+'%', left: xClient-2+'%'}"><i class="fa fa-user-secret" aria-hidden="true"></i>
+              <div id="dron-marker" v-show='isShowDronMarker' class="dron-marker position-absolute" :style="{top: yDron-2+'%', left: xDron-2+'%'}"></div>
+              <div id="client-marker" v-show='isShowClientMarker' class="client-marker position-absolute" :title="'x: '+ xClient +', y: ' + yClient " :style="{top: yClient-2+'%', left: xClient-2+'%'}"><i class="fa fa-user-secret"
+                  aria-hidden="true"></i>
               </div>
               <img class="img-thumbnail map-box" @click="moveMe" id="map-image" src="image/plane1.jpg" alt="">
 
