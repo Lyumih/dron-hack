@@ -34,11 +34,11 @@
         <div class="alert alert-success" v-if="isShowAlertSuccess" role="alert">
           <strong>Товар был успешно доставлен!</strong>
         </div>
-        <p>{{ message }} <span v-show="isShowTime">{{ time }} сек</span></p>
-        <button class="btn btn-primary" v-show="isShowButton" @click="wantGetBox">{{ labelButton }}</button>
-        <button class="btn btn-primary" v-show="isShowButtonSendXY" @click="sendCoordinat">{{ labelButton }}</button>
+        <p>{{ message }} <span v-if="isShowTime">{{ time }} сек</span></p>
+        <button class="btn btn-primary" v-if="isShowButton" @click="wantGetBox">{{ labelButton }}</button>
+        <button class="btn btn-primary" v-if="isShowButtonSendXY" @click="sendCoordinat">{{ labelButton }}</button>
 
-        <div class="progress" v-show="isShowProgressBar">
+        <div class="progress" v-if="isShowProgressBar">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="{width:progressCreatePhoto+'%' }">
             {{ progressCreatePhoto }}</div>
         </div>
@@ -46,14 +46,14 @@
 
 
         <!-- КАРТА -->
-        <div v-show="isShowMap">
+        <div v-if="isShowMap">
           <p>x: {{ xClient }}<br>y {{ yClient }}</p>
 
           <div class="col-12">
             <div class="position-relative">
 
-              <div id="dron-marker" v-show='isShowDronMarker' class="dron-marker position-absolute" :style="{top: yDron-2+'%', left: xDron-2+'%'}"></div>
-              <div id="client-marker" v-show='isShowClientMarker' class="client-marker position-absolute" :title="'x: '+ xClient +', y: ' + yClient " :style="{top: yClient-2+'%', left: xClient-2+'%'}"><i class="fa fa-user-secret"
+              <div id="dron-marker" v-if='isShowDronMarker' class="dron-marker position-absolute" :style="{top: yDron-2+'%', left: xDron-2+'%'}"></div>
+              <div id="client-marker" v-if='isShowClientMarker' class="client-marker position-absolute" :title="'x: '+ xClient +', y: ' + yClient " :style="{top: yClient-2+'%', left: xClient-2+'%'}"><i class="fa fa-user-secret"
                   aria-hidden="true"></i>
               </div>
               <img class="img-thumbnail map-box" @click="moveMe" id="map-image" src="image/plane1.jpg" alt="">
