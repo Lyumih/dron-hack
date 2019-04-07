@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Cormorant+Infant" rel="stylesheet">
   <link rel="stylesheet" href="css/font.css">
-  <link rel="stylesheet" href="css/dron-order.css">
+  <link rel="stylesheet" href="css/dron-drop-box.css">
   <title>DRON: Забрать заказ</title>
 </head>
 
@@ -22,33 +22,29 @@
     </a>
   </nav>
 
-  <div class="container shadow-lg" id="app">
-    <div class="row ">
-      <div class="col-12 my-4 text-center">
-        <h2>Заказ №13 прибыл</p>
-      </div>
-    </div>
-
+  <!-- CONTENT -->
+  <div id="app" class="container shadow-lg py-3" id="app">
     <div class="row">
-      <div class="col-12 my-4 text-center">
-        <button type="button" v-show="isSend" @click="sendCode" class="btn btn-primary btn-lg">Получить код авторизации</button>
-
-        <div class="input-group input-group-lg" v-show="isCheck">
-
-          <div class="input-group-prepend">
-            <span class="input-group-text">Код</span>
-          </div>
-          <input type="text" class="form-control" placeholder="****" minlength="4" maxlength="4" aria-label="" aria-describedby="basic-addon1">
-          <div class="input-group-append">
-            <button class="btn btn-success" @click="checkCode" type="button">Проверить</button>
-          </div>
-        </div>
-
-        <h2 class="alert alert-success" v-show="isSuccess">Успех</h2>
+      <!-- Page 1: button get box -->
+      <div class="col-12 text-center" v-show="isWantGetBox">
+        <p>Дрон прилетел в место доставки</p>
+        <button class="btn btn-primary" @click="wantGetBox">Забрать товар</button>
       </div>
 
+      <!-- Page 2: PROGRESS BAR load photo -->
+      <div class="col-12 text-center" v-show="isCreatedPhotos">
+        <p>Подождите пожалуйста, делается снимок с метом доставки</p>
+        <p>Снимок готов!</p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+        </div>
+      </div>
+
+
+
+
+
     </div>
-  </div>
   </div>
 
 
@@ -56,7 +52,7 @@
   <script src="lib/jquery-3.3.1.min.js"></script>
   <script src="lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
   <script src="lib/vue.js"></script>
-  <script src="js/dron-order.js"></script>
+  <script src="js/dron-drop-box.js"></script>
 
 </body>
 

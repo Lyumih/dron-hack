@@ -1,19 +1,21 @@
 var app = new Vue({
   el: "#app",
   data: {
-    code: '1234',
-    isSend: true,
-    isCheck: false,
-    isSuccess: false
+    isWantGetBox: true,
+    isCreatedPhotos: false,
+    progressCreatePhoto: 0,
   },
   methods: {
-    sendCode: function() {
-      this.isSend = false;
-      this.isCheck = true;
+    wantGetBox: function() {
+      this.isWantGetBox = false;
+      this.isCreatedPhotos = true;
     },
-    checkCode: function() {
-      this.isCheck = false;
-      this.isSuccess = true;
+    startCreatePhoto: function() {
+      while (this.progressCreatePhoto < 100) {
+        this.progressCreatePhoto++;
+        console.log(this.progressCreatePhoto);
+      }
     }
+
   }
 })
