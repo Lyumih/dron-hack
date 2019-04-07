@@ -3,3 +3,7 @@ body {
   font-size: 24px;
   text-shadow: 2px 2px 2px #aaa;
 }
+
+main {
+  min-height: 500px;
+}

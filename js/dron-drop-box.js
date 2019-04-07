@@ -10,6 +10,11 @@ var app = new Vue({
     isShowMap: false,
     isShowClientMarker: false,
     isShowDronMarker: false,
+    isShowButtonSendXY: false,
+    isShowAlert: false,
+    isShowAlertSuccess: false,
+
+    isSendData: false,
 
     time: 1,
     progressCreatePhoto: 95,
@@ -39,8 +44,6 @@ var app = new Vue({
       this.message = "Пожалуйста, подождите. Делается снимок местности."
       this.isShowProgressBar = true
 
-      console.log(this.progressCreatePhoto)
-
       let timer = setInterval(() => {
         this.progressCreatePhoto++
         if (this.progressCreatePhoto >= 100) {
@@ -56,12 +59,14 @@ var app = new Vue({
       this.isShowMap = true
 
       this.labelButton = "Отправить координаты"
-      this.isShowButton = true
+      this.isShowButtonSendXY = true
     },
 
     moveMe: function(event) {
-      this.isShowClientMarker = true;
-      this.isShowDronMarker = true;
+      this.isShowAlert = false
+      if (this.isSendData) return
+      this.isShowClientMarker = true
+      this.isShowDronMarker = true
       console.log(event)
 
       var x = event.offsetX == undefined ? event.layerX : event.offsetX;
@@ -89,10 +94,45 @@ var app = new Vue({
       }
     },
 
+    sendCoordinat: function() {
+      if (this.yDron === 0) {
+        this.isShowAlert = true
+        return;
+      }
+      this.isSendData = true
+      this.isShowButton = false
+      this.progressCreatePhoto = 0
+      this.isShowProgressBar = true
+      this.message = "Дрон доставит груз в указаной области в течении: "
+      this.time = 10
+      this.isShowTime = true
+
+      let timer = setInterval(() => {
+        this.isShowButtonSendXY = false
+        this.progressCreatePhoto++
+        if (this.progressCreatePhoto >= 100) {
+          clearInterval(timer)
+        }
+      }, 100)
+
+      let timer2 = setInterval(() => {
+        this.time--
+        if (this.time <= 0) {
+          clearInterval(timer2)
+          this.isShowProgressBar = false
+          this.isShowTime = false
+          this.finishOrder()
+        }
+      }, 1000)
+
+    },
+
     finishOrder: function() {
       this.isShowMap = false
       this.labelButton = 'Заказать новый товар'
-      this.message = 'Товар был успешно доставлен! Спасибо, что воспользовались нашим сервисом'
+      this.message = 'Спасибо, что воспользовались нашим сервисом!'
+      this.isShowAlertSuccess = true
+
     }
 
   }
